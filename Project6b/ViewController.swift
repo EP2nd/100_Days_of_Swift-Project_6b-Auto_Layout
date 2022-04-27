@@ -6,7 +6,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         /* let metrics = ["labelHeight": 88] */
-        var previous: UILabel?
         
         let label1 = UILabel()
         label1.translatesAutoresizingMaskIntoConstraints = false
@@ -50,9 +49,18 @@ class ViewController: UIViewController {
             view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(label)]", options: [], metrics: nil, views: viewsDictionary))
             view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[label1(labelHeight@999)]-[label2(label1)]-[label3(label1)]-[label4(label1)]-[label5(label1)]-(>=10)-|", options: [], metrics: metrics, views: viewsDictionary)) */
         
+        var previous: UILabel?
+        
         for label in [label1, label2, label3, label4, label5] {
-            label.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            label.heightAnchor.constraint(equalToConstant: 88).isActive = true
+            
+            /* label.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true */
+            
+            label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+            
+            /* label.heightAnchor.constraint(equalToConstant: 88).isActive = true */
+            
+            label.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2, constant: -10).isActive = true
             
             if let previous = previous {
                 label.topAnchor.constraint(equalTo: previous.bottomAnchor, constant: 10).isActive = true
